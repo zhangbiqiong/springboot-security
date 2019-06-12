@@ -2,9 +2,10 @@ package com.example.demo;
 
 import java.util.concurrent.atomic.AtomicLong;
 
+import javax.annotation.security.RolesAllowed;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,14 +35,25 @@ public class DemoApplication {
 		}
 	}
 	@RestController
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	class DemoController {
 		private final AtomicLong counter = new AtomicLong();
 		
-		@RequestMapping("/greeting")
-		public Greeting greeting(@RequestParam(value = "name", defaultValue = "World") String name) {
+		@RolesAllowed({"USER", "ADMIN"}) 
+		@RequestMapping("/greeting1")
+		public Greeting greeting1(@RequestParam(value = "name", defaultValue = "World") String name) {
 			return new Greeting(counter.incrementAndGet(), name);
 		}
 
+		@RolesAllowed({"USER", "ADMIN"}) 
+		@RequestMapping("/greeting2")
+		public Greeting greeting2(@RequestParam(value = "name", defaultValue = "World") String name) {
+			return new Greeting(counter.incrementAndGet(), name);
+		}
+
+		@RolesAllowed({"ADMIN"}) 
+		@RequestMapping("/greeting3")
+		public Greeting greeting3(@RequestParam(value = "name", defaultValue = "World") String name) {
+			return new Greeting(counter.incrementAndGet(), name);
+		}
 	}
 }
