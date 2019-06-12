@@ -38,19 +38,19 @@ public class DemoApplication {
 	class DemoController {
 		private final AtomicLong counter = new AtomicLong();
 		
-		@RolesAllowed({"USER", "ADMIN"}) 
+		@RolesAllowed({"USER"}) 
 		@RequestMapping("/greeting1")
 		public Greeting greeting1(@RequestParam(value = "name", defaultValue = "World") String name) {
 			return new Greeting(counter.incrementAndGet(), name);
 		}
 
-		@RolesAllowed({"USER", "ADMIN"}) 
+		@RolesAllowed({"USER"}) 
 		@RequestMapping("/greeting2")
 		public Greeting greeting2(@RequestParam(value = "name", defaultValue = "World") String name) {
 			return new Greeting(counter.incrementAndGet(), name);
 		}
 
-		@RolesAllowed({"ADMIN"}) 
+		@RolesAllowed({"ADMIN"}) //只有admin才能访问
 		@RequestMapping("/greeting3")
 		public Greeting greeting3(@RequestParam(value = "name", defaultValue = "World") String name) {
 			return new Greeting(counter.incrementAndGet(), name);
