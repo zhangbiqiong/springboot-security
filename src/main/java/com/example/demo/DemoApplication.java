@@ -38,13 +38,13 @@ public class DemoApplication {
 	class DemoController {
 		private final AtomicLong counter = new AtomicLong();
 		
-		@RolesAllowed({"USER"}) 
+		@RolesAllowed({"USER"}) 		
 		@RequestMapping("/greeting1")
 		public Greeting greeting1(@RequestParam(value = "name", defaultValue = "World") String name) {
 			return new Greeting(counter.incrementAndGet(), name);
 		}
 
-		@RolesAllowed({"USER"}) 
+		@RolesAllowed({"USER"}) 		
 		@RequestMapping("/greeting2")
 		public Greeting greeting2(@RequestParam(value = "name", defaultValue = "World") String name) {
 			return new Greeting(counter.incrementAndGet(), name);

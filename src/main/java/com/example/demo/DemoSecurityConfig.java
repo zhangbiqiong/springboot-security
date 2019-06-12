@@ -28,7 +28,7 @@ public class DemoSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()//直接定义两个用户
 		.withUser("user").password("$2a$04$tJo9IkiCTuuq1B3zQCwRt.dJwS8pP9Yai/OnafpypR95pxn6dvJKO").roles("USER").and()
-        .withUser("admin").password("$2a$04$gNkd8KGosXKsk6sOBJmEKuWJvF.s2D1xhazaRZkcjq/yhGwUge5EG").roles("ADMIN");
+        .withUser("admin").password("$2a$04$gNkd8KGosXKsk6sOBJmEKuWJvF.s2D1xhazaRZkcjq/yhGwUge5EG").roles("ADMIN","USER");
     }
 
     @Bean
