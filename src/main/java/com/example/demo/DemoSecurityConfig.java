@@ -21,7 +21,7 @@ public class DemoSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()//所有网页都需要先登录
             .anyRequest().authenticated()
             .and()
-            .formLogin();
+            .formLogin();//提供默认的登录页面
     }
 
     @Override

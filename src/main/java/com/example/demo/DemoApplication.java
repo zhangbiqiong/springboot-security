@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import lombok.NonNull;
+
 @SpringBootApplication
 public class DemoApplication {
 
@@ -23,19 +25,19 @@ public class DemoApplication {
 
 		@RolesAllowed({ "USER" })
 		@RequestMapping("/greeting1")
-		public Greeting greeting1(@RequestParam(value = "name", defaultValue = "World") String name) {
+		public Greeting greeting1(@RequestParam(value = "name", defaultValue = "World") @NonNull String name) {
 			return new Greeting(counter.incrementAndGet(), name);
 		}
 
 		@RolesAllowed({ "USER" })
 		@RequestMapping("/greeting2")
-		public Greeting greeting2(@RequestParam(value = "name", defaultValue = "World") String name) {
+		public Greeting greeting2(@RequestParam(value = "name", defaultValue = "World") @NonNull String name) {
 			return new Greeting(counter.incrementAndGet(), name);
 		}
 
 		@RolesAllowed({ "ADMIN" }) // 只有admin才能访问
 		@RequestMapping("/greeting3")
-		public Greeting greeting3(@RequestParam(value = "name", defaultValue = "World") String name) {
+		public Greeting greeting3(@RequestParam(value = "name", defaultValue = "World") @NonNull String name) {
 			return new Greeting(counter.incrementAndGet(), name);
 		}
 	}
