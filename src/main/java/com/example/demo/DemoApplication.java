@@ -16,41 +16,24 @@ public class DemoApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
 	}
-	class Greeting {
 
-		private final long id;
-		private final String content;
-
-		public Greeting(long id, String content) {
-			this.id = id;
-			this.content = content;
-		}
-
-		public long getId() {
-			return id;
-		}
-
-		public String getContent() {
-			return content;
-		}
-	}
 	@RestController
 	class DemoController {
 		private final AtomicLong counter = new AtomicLong();
-		
-		@RolesAllowed({"USER"}) 		
+
+		@RolesAllowed({ "USER" })
 		@RequestMapping("/greeting1")
 		public Greeting greeting1(@RequestParam(value = "name", defaultValue = "World") String name) {
 			return new Greeting(counter.incrementAndGet(), name);
 		}
 
-		@RolesAllowed({"USER"}) 		
+		@RolesAllowed({ "USER" })
 		@RequestMapping("/greeting2")
 		public Greeting greeting2(@RequestParam(value = "name", defaultValue = "World") String name) {
 			return new Greeting(counter.incrementAndGet(), name);
 		}
 
-		@RolesAllowed({"ADMIN"}) //只有admin才能访问
+		@RolesAllowed({ "ADMIN" }) // 只有admin才能访问
 		@RequestMapping("/greeting3")
 		public Greeting greeting3(@RequestParam(value = "name", defaultValue = "World") String name) {
 			return new Greeting(counter.incrementAndGet(), name);
